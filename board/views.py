@@ -85,6 +85,12 @@ class ProductUpdateView(generics.RetrieveUpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         kwargs['partial'] = True
+        temp = []
+        for i in request.data:
+            if not request.data[i]:
+                temp.append(i)
+        for i in temp:
+            del request.data[i]
         return super().update(request, *args, **kwargs)
 
 class ProductView(viewsets.ModelViewSet):
