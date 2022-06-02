@@ -7,7 +7,7 @@ router = DefaultRouter()
 router.register(r'product', ProductView)
 router.register(r'location', LocationView)
 router.register(r'unit', UnitView)
-
+#
 urlpatterns = [
     path('create/', ProductAddView.as_view()),
     path('', include(router.urls)),
