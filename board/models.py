@@ -29,6 +29,7 @@ class ProductList(models.Model):
     serial = models.CharField(primary_key=True, max_length=200)
     in_date = models.DateField(null=True, blank=True)
     date = models.DateField(null=True, blank=True)
+    sold_date = models.DateField(null=True, blank=True)
     amount = models.IntegerField(default=0, blank=True, null=False)
 
     def __str__(self):
