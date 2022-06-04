@@ -89,11 +89,10 @@ class ProductUpdateView(generics.RetrieveUpdateAPIView):
         for i in request.data:
             if not request.data[i]:
                 temp.append(i)
-            else:
+            elif i == 'location':
                 request.data[i] = Location.objects.get(name=request.data[i]).id
         for i in temp:
             del request.data[i]
-        print(request.data)
         return super().update(request, *args, **kwargs)
 
 class ProductSearchView(generics.ListAPIView):
