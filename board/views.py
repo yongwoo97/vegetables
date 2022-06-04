@@ -103,7 +103,7 @@ class ProductSearchView(generics.ListAPIView):
     serializer_class = ProductSerialzer
 
     def list(self, request, *args, **kwargs):
-        pre_qs = ProductList.objects.select_related('product_name', 'location', 'unit')
+        pre_qs = ProductList.objects.select_related('product_name', 'location', 'unit').exclude(location=1).exclude(location=2)
         # queryset = Reagent.objects.prefetch_related(Prefetch('reagent_list', queryset=pre_qs)).filter(
         #     reagent_list__location=kwargs['location']).exclude(reagent_list__isnull=True).order_by('name')
         queryset = Product.objects.prefetch_related(Prefetch('product_list', queryset=pre_qs)).filter(
