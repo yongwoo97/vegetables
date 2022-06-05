@@ -35,7 +35,7 @@ class ProductAddSerializer(serializers.ModelSerializer):
         }
 #판매완료, 장소이동 기능만 있음
 class ProductUpdateSerializer(serializers.ModelSerializer):
-    #이건 아마도 readonly 필드로 구분이 되어서 업데이트가 제대로 안되는듯 하네 후,,,
+    #이건 아마도 slugrelatedfield는 readonly 필드로 구분이 되어서 업데이트가 제대로 안되는듯 하네 후
     #location = serializers.SlugRelatedField(read_only=True, slug_field='name')
     #unit = serializers.SlugRelatedField(read_only=True, slug_field='name')
     class Meta:
