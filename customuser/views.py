@@ -49,4 +49,4 @@ class UsernameUniqueView(generics.GenericAPIView):
         if serializer.is_valid():
             return JsonResponse({'message': '사용가능한 아이디입니다'}, status=status.HTTP_200_OK)
         else:
-            return JsonResponse({'message': '중복된 아이디입니다.'}, status=500)
+            return JsonResponse(serializer.errors, status=500)
