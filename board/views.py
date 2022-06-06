@@ -90,6 +90,7 @@ class ProductUpdateView(generics.RetrieveUpdateAPIView):
             if not request.data[i]:
                 temp.append(i)
             elif i == 'location':
+                #아랫부분과 slug를 잘 조합해서 깔끔하게 짜보자.
                 request.data[i] = Location.objects.get(name=request.data[i]).id
         for i in temp:
             del request.data[i]

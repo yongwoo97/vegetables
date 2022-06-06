@@ -33,11 +33,15 @@ class ProductAddSerializer(serializers.ModelSerializer):
             'date': {'required': True},
             'in_date': {'required': True}
         }
+
+from .models import Location, Unit
 #판매완료, 장소이동 기능만 있음
 class ProductUpdateSerializer(serializers.ModelSerializer):
     #이건 아마도 slugrelatedfield는 readonly 필드로 구분이 되어서 업데이트가 제대로 안되는듯 하네 후
+    #만약에 readonly 옵션을 false로 선택한다면???
+    #queryset=Location.objects.all(), read_only=False,
     #location = serializers.SlugRelatedField(read_only=True, slug_field='name')
-    #unit = serializers.SlugRelatedField(read_only=True, slug_field='name')
+    #unit = serializers.SlugRelatedField(queryset=Unit.objects.all(), read_only=False, slug_field='id')
     class Meta:
         model = ProductList
         fields = '__all__'

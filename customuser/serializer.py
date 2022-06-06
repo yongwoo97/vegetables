@@ -40,7 +40,7 @@ class LoginSerializer(serializers.Serializer):
 
 class UsernameUniqueSerializer(serializers.ModelSerializer):
 
-    username = serializers.CharField(required=True, validators=[UniqueValidator(queryset=User.objects.all())])
+    username = serializers.CharField(required=True, validators=[UniqueValidator(queryset=User.objects.all()), MinLengthValidator(4, '4자리 이상으로 설정해주세요')])
     #username = serializers.CharField(max_length=255)
     class Meta:
         model = User
