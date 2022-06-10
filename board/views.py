@@ -200,6 +200,14 @@ class ProductView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductPureSerializer
 
+    def perform_create(self, serializer):
+        data = Product.objects.aggregate(id=Max('id'))
+        if data['id']:
+            integer = data['id'] + 1
+        else:
+            integer = 1
+        serializer.save(id=integer)
+
 class LocationView(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
     permission_classes = [AllowAny]
