@@ -67,6 +67,7 @@ class ProductListView(generics.ListAPIView):
                 new_list.append(j)
 
             if new_list:
+                i['unit'] = Unit.objects.get(id=i['unit'])
                 i['total'] = total
                 i['waste'] = waste
                 result.append(i)

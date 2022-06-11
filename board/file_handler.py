@@ -13,6 +13,6 @@ def excel_file_maker(data, loc):
                 j['sold_date'] = 'N/A'
             file_sheet.append([j['product_name'], j['serial'], j['in_date'],
                                j['date'], j['sold_date'], j['amount'],
-                               j['unit'], j['location']])
+                               i['unit'], j['location']])
 
     return file
