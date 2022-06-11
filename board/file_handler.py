@@ -1,4 +1,5 @@
 from openpyxl import Workbook
+from .models import Unit
 def excel_file_maker(data, loc):
 
     file = Workbook()
@@ -13,6 +14,6 @@ def excel_file_maker(data, loc):
                 j['sold_date'] = 'N/A'
             file_sheet.append([j['product_name'], j['serial'], j['in_date'],
                                j['date'], j['sold_date'], j['amount'],
-                               i['unit'], j['location']])
+                               Unit.objects.get(id=i['unit']).name, j['location']])
 
     return file
