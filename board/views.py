@@ -79,6 +79,11 @@ class ProductUpdateView(generics.RetrieveUpdateAPIView):
     queryset = ProductList.objects.all()
     serializer_class = ProductUpdateSerializer
 
+    def retrieve(self, request, *args, **kwargs):
+            instance = self.get_object()
+            serializer = ProductListSerializer(instance)
+            return Response(serializer.data)
+
     def update(self, request, *args, **kwargs):
         kwargs['partial'] = True
         temp = []
