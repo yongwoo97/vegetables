@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from .views import ProductAddView, ProductView, LocationView, UnitView, ProductListView, ProductUpdateView
-from .views import ProductSearchView, ExcelMakerView, RevenueView, ProductConfirmView
+from .views import ProductSearchView, ExcelMakerView, RevenueView
 router = DefaultRouter()
 router.register(r'product', ProductView)
 router.register(r'location', LocationView)
