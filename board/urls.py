@@ -17,5 +17,5 @@ urlpatterns = [
     path('search/<str:name>/', ProductSearchView.as_view()),
     path('download/<str:location>/', ExcelMakerView.as_view()),
     path('revenue/', RevenueView.as_view()),
-    path('confirm/', ProductUpdateView.as_view()),
+    path('confirm/<str:pk>/', ProductUpdateView.as_view()),
 ]
