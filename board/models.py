@@ -1,14 +1,5 @@
 from django.db import models
 
-# Create your models here.
-class Product(models.Model):
-    id = models.IntegerField(default=1)
-    name = models.CharField(primary_key=True, null=False, blank=False, max_length=300)
-    unit_price = models.IntegerField(default=0, blank=True, null=False)
-    unit = models.CharField(max_length=100, null=True, blank=True)
-    def __str__(self):
-        return self.name
-
 class Location(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False, unique=True)
 
@@ -18,6 +9,14 @@ class Location(models.Model):
 class Unit(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False, unique=True)
 
+    def __str__(self):
+        return self.name
+
+class Product(models.Model):
+    id = models.IntegerField(default=1)
+    name = models.CharField(primary_key=True, null=False, blank=False, max_length=300)
+    unit_price = models.IntegerField(default=0, blank=True, null=False)
+    unit = models.ForeignKey(Unit, related_name='product_unit', on_delete=models.DO_NOTHING)
     def __str__(self):
         return self.name
 

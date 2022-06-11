@@ -30,12 +30,7 @@ class ProductAddView(generics.CreateAPIView):
             ).id
         except:
             pass
-        try:
-            request.data['unit'] = Unit.objects.get(
-                name=request.data['unit']
-            ).id
-        except:
-            pass
+
         return super().create(request, *args, **kwargs)
 
 class ProductListView(generics.ListAPIView):
@@ -199,6 +194,17 @@ class ProductView(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     queryset = Product.objects.all()
     serializer_class = ProductPureSerializer
+
+    def create(self, request, *args, **kwargs):
+
+        try:
+            request.data['unit'] = Unit.objects.get(
+                name=request.data['unit']
+            ).id
+        except:
+            pass
+
+        return super().create(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         data = Product.objects.aggregate(id=Max('id'))
