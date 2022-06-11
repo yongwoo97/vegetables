@@ -4,5 +4,4 @@
 .idea
 *.pyc
 __pycache__
-/customuser/migrations
 db.sqlite3
