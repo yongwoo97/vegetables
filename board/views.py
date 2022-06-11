@@ -45,7 +45,7 @@ class ProductListView(generics.ListAPIView):
     serializer_class = ProductSerialzer
 
     def list(self, request, *args, **kwargs):
-        pre_qs = ProductList.objects.select_related('product_name', 'location', 'unit').filter(location=kwargs['location'])
+        pre_qs = ProductList.objects.select_related('product_name', 'location').filter(location=kwargs['location'])
         # queryset = Reagent.objects.prefetch_related(Prefetch('reagent_list', queryset=pre_qs)).filter(
         #     reagent_list__location=kwargs['location']).exclude(reagent_list__isnull=True).order_by('name')
         queryset = Product.objects.prefetch_related(Prefetch('product_list', queryset=pre_qs)).exclude(
@@ -103,7 +103,7 @@ class ProductSearchView(generics.ListAPIView):
     serializer_class = ProductSerialzer
 
     def list(self, request, *args, **kwargs):
-        pre_qs = ProductList.objects.select_related('product_name', 'location', 'unit').exclude(location=1).exclude(location=2)
+        pre_qs = ProductList.objects.select_related('product_name', 'location').exclude(location=1).exclude(location=2)
         # queryset = Reagent.objects.prefetch_related(Prefetch('reagent_list', queryset=pre_qs)).filter(
         #     reagent_list__location=kwargs['location']).exclude(reagent_list__isnull=True).order_by('name')
         queryset = Product.objects.prefetch_related(Prefetch('product_list', queryset=pre_qs)).filter(
@@ -142,7 +142,7 @@ class RevenueView(generics.GenericAPIView):
     serializer_class = ProductSerialzer
 
     def post(self, request, *args, **kwargs):
-        pre_qs = ProductList.objects.select_related('product_name', 'location', 'unit').filter(
+        pre_qs = ProductList.objects.select_related('product_name', 'location').filter(
             sold_date__range=[timezone.make_aware(datetime.strptime(request.data['start'], '%Y-%m-%d')),
                          timezone.make_aware(datetime.strptime(request.data['end'], '%Y-%m-%d'))]).filter(location=2)
 
@@ -175,7 +175,7 @@ class ExcelMakerView(generics.RetrieveAPIView):
     serializer_class = ProductSerialzer
 
     def retrieve(self, request, *args, **kwargs):
-        pre_qs = ProductList.objects.select_related('product_name', 'location', 'unit').filter(
+        pre_qs = ProductList.objects.select_related('product_name', 'location').filter(
             location=kwargs['location']
         )
         queryset = Product.objects.prefetch_related(Prefetch('product_list', queryset=pre_qs)).exclude(product_list__isnull=True).order_by('name')
