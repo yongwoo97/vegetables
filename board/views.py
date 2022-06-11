@@ -67,7 +67,7 @@ class ProductListView(generics.ListAPIView):
                 new_list.append(j)
 
             if new_list:
-                i['unit'] = Unit.objects.get(id=i['unit'])
+                i['unit'] = Unit.objects.get(id=i['unit']).name
                 i['total'] = total
                 i['waste'] = waste
                 result.append(i)
@@ -131,6 +131,7 @@ class ProductSearchView(generics.ListAPIView):
                 new_list.append(j)
 
             if new_list:
+                i['unit'] = Unit.objects.get(id=i['unit']).name
                 i['total'] = total
                 i['waste'] = waste
                 result.append(i)
@@ -163,6 +164,7 @@ class RevenueView(generics.GenericAPIView):
                 new_list.append(j)
 
             if new_list:
+                i['unit'] = Unit.objects.get(id=i['unit']).name
                 i['total'] = total
                 result.append(i)
         return Response(result)
